@@ -75,15 +75,15 @@ CTEST_SETUP(thrust) {
 }
 
 CTEST2(thrust, thrust_default){
+    reset_thrust();
     data->result = get_thrust();
     int expResult = 0;
 
     ASSERT_EQUAL(expResult, data->result);
-
-    // add check for acceleration values for x and y
 }
 
 CTEST2(thrust, thrust_decrement_min_value){
+    reset_thrust();
     int button = 0;
     set_thrust(button);
 
@@ -94,16 +94,18 @@ CTEST2(thrust, thrust_decrement_min_value){
 }
 
 CTEST2(thrust, thrust_increment){
+    reset_thrust();
     int button = 1;
     set_thrust(button);
 
     data->result = get_thrust();
-    int expResult = 5;
+    int expResult = 10;
 
     ASSERT_EQUAL(expResult, data->result);
 }
 
 CTEST2(thrust, thrust_increment_decrement){
+    reset_thrust();
     int button = 1;
     set_thrust(button);
     set_thrust(button);
@@ -112,12 +114,13 @@ CTEST2(thrust, thrust_increment_decrement){
     set_thrust(button);
 
     data->result = get_thrust();
-    int expResult = 15;
+    int expResult = 20;
 
     ASSERT_EQUAL(expResult, data->result);
 }
 
 CTEST2(thrust, thrust_increment_max_value){
+    reset_thrust();
     int button = 1;
     set_thrust(button);
     set_thrust(button);
@@ -140,41 +143,41 @@ CTEST2(thrust, thrust_increment_max_value){
 /*
  * Third Test Set (Physics Model)
  */
-CTEST_DATA(physics) {
-    // struct task_t task[3];
-    // int size;
+// CTEST_DATA(physics) {
+//     // struct task_t task[3];
+//     // int size;
 
-    int result;
-};
+//     int result;
+// };
 
-CTEST_SETUP(physics) {
-    // int angle_value[] = {-1, 25};
-    // data->size = sizeof(execution) / sizeof(execution[0]);
-    // init(data->task, execution, data->size);
-    // first_come_first_served(data->task, data->size);
-    data->result = 0;
-}
+// CTEST_SETUP(physics) {
+//     // int angle_value[] = {-1, 25};
+//     // data->size = sizeof(execution) / sizeof(execution[0]);
+//     // init(data->task, execution, data->size);
+//     // first_come_first_served(data->task, data->size);
+//     data->result = 0;
+// }
 
-CTEST2(physics, test_physics_velocity_no_thrust){
-    int thrust = 0;
-    velocity_update(thrust);
-    velocity_update(thrust);
-    velocity_update(thrust);
-    int time = 3;
+// CTEST2(physics, test_physics_velocity_no_thrust){
+//     int thrust = 0;
+//     velocity_update(thrust);
+//     velocity_update(thrust);
+//     velocity_update(thrust);
+//     int time = 3;
 
-    data->result = get_velocity();
-    int expResult = time * 10; // gravitational constant using 10 as example
-    ASSERT_EQUAL(expResult, data->result);
-}
+//     data->result = get_velocity();
+//     int expResult = time * 10; // gravitational constant using 10 as example
+//     ASSERT_EQUAL(expResult, data->result);
+// }
 
-CTEST2(physics, test_physics_velocity_50_thrust){
-    int thrust = 50;
-    velocity_update(thrust);
-    velocity_update(thrust);
-    velocity_update(thrust);
-    int time = 3;
+// CTEST2(physics, test_physics_velocity_50_thrust){
+//     int thrust = 50;
+//     velocity_update(thrust);
+//     velocity_update(thrust);
+//     velocity_update(thrust);
+//     int time = 3;
 
-    data->result = get_velocity();
-    int expResult = time * 10 * 50; // still need to change to reflect addition of thrust
-    ASSERT_EQUAL(expResult, data->result);
-}
+//     data->result = get_velocity();
+//     int expResult = time * 10 * 50; // still need to change to reflect addition of thrust
+//     ASSERT_EQUAL(expResult, data->result);
+// }
